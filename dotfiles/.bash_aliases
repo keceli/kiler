@@ -36,18 +36,18 @@ alias df='df -kTh'
 #-------------------------------------------------------------
 if ls --color=auto / >/dev/null 2>&1
 then
- alias ls='ls -h --color=auto' # GNU ls
- alias ll="ls -lv --group-directories-first"
+ alias ls='ls -hC --color=auto' # GNU ls
+ alias ll="ls -lvt --group-directories-first"
 else
- alias ls='ls -h -G' # BSD ls
- alias ll="ls -lv "
+ alias ls='ls -hC -G' # BSD ls
+ alias ll="ls -lvt "
 fi
 #alias ls='ls -h --color'
 alias lx='ls -lXB'         #  Sort by extension.
-alias lk='ls -lSr'         #  Sort by size, biggest last.
-alias lt='ls -ltr'         #  Sort by date, most recent last.
-alias lc='ls -ltcr'        #  Sort by/show change time,most recent last.
-alias lu='ls -ltur'        #  Sort by/show access time,most recent last.
+alias lk='ls -lS'         #  Sort by size
+alias lt='ls -lt'         #  Sort by date
+alias lc='ls -ltc'        #  Sort by/show change time
+alias lu='ls -ltu'        #  Sort by/show access time
 
 # The ubiquitous 'll': directories first, with alphanumeric sorting:
 alias lm='ll |more'        #  Pipe through 'more'
