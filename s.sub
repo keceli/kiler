@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+echo submit script for dftb jobs
+echo usage "s.sub i j k l"
+echp i: number of nodes,  j: number of cores per node
+echo k: number of slices, l: problem size
+NP=$(($1 * $2))
+MYJOB=P$4.nprocEps$3p$NP
+qsub -n $1 -t 100 --mode c$2 -o log.nanotube2-r_$MYJOB -e err.$MYJOB --jobname SIPs$MYJOB $DFTB/dftb -fA $DFTB_BIN/nanotube2-r_P$4_A -fB $DFTB_BIN/nanotube2-r_P$4_B -mat_mumps_icntl_13 1 -mat_mumps_icntl_7 2 -eps_nev 100 -eps_tol 1.e-4 -nprocEPS $3 -log_summary  
