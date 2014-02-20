@@ -38,7 +38,7 @@ def main():
     series2y=[]
     series3x=[]
     series3y=[]      
-    for i in len(nSlices):
+    for i in range(len(nSlices)):
         if nProcessors[i]/nSlices[i]==4:
             series1x.append(nProcessors[i])
             series1y.append(totalTime[i])
