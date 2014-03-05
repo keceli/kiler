@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+find ./log.* -type f -size -4096c
+
