@@ -203,7 +203,7 @@ def plotProfile(nCoresPerSlice):
     plt.yscale('log',basey=2)
     plt.xlabel('Number of cores')
     plt.ylabel('Time (s)')
-#    plt.legend(loc='lower left')
+    plt.legend('best')
     
 def plotPolyFit(x,y,n):
     #plot nth order polynomial fit   
@@ -287,9 +287,8 @@ def main():
     else:
         readLogDirectory()
         plt.figure()
-        plotTimings(4)
-        plotTimings(8)
-        plotTimings(16)
+        for i in range(max(nCores)):
+            plotTimings(i+1)
         plt.savefig('timing.png')
         plt.figure()
         plotSpeedup(4)
