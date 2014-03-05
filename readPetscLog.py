@@ -163,8 +163,9 @@ def plotSpeedup(nCoresPerSlice):
     y=[totalTime[i] for i in index]
     speedup=[]
     speedup=normalize(sorted(y,reverse=True))
+    coreup=normalize(sorted(x,))
     plt.plot(sorted(x),speedup,linestyle='None',marker='o',color='b',label=mylabel,markersize=8)
-    plt.plot(sorted(x),[speedup[0]*2**i for i in range(len(speedup))],linestyle='-',marker='.',color='k',label='ideal')
+    plt.plot(sorted(x),[speedup[0]/coreup[i] for i in range(len(speedup))],linestyle='-',color='k',label='ideal')
     plt.xscale('log',basex=2)
     plt.yscale('log',basey=2)
     plt.xlabel('Number of cores')
@@ -204,7 +205,7 @@ def plotProfile(nCoresPerSlice):
     plt.yscale('log',basey=2)
     plt.xlabel('Number of cores')
     plt.ylabel('Time (s)')
-    plt.legend('best')
+    plt.legend(loc='best')
     
 def plotPolyFit(x,y,n):
     #plot nth order polynomial fit   
