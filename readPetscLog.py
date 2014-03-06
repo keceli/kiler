@@ -208,6 +208,8 @@ def plotProfile(nCoresPerSlice):
     plt.plot(x,[solveTime[i] for i in index],label='Solve',linestyle='None',marker='+',markersize=8,color='g') 
     plt.plot(x,[finalTime[i] for i in index],label='Final',linestyle='None',marker='*',markersize=8,color='y') 
     plt.title(mylabel)
+    plt.xlim(min(x)*0.7,max(x)/0.7)
+    plt.xlim(min(y)*0.7,max(y)/0.7)
     plt.xscale('log',basex=2)
     plt.yscale('log',basey=2)
     plt.xlabel('Number of cores')
