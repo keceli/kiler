@@ -1,16 +1,26 @@
 #!/usr/bin/env bash
-echo submit script for dftb jobs
-echo usage "s.sub i j k"
-echo i: problem size,  j: number of slices, k: total number of cores
-PSIZE=$1
-NSLICES=$2
-NCORES=$3
-NCORESPERNODE=16
-NMINUTES=30
-NNODES=$(($NCORES / $NCORESPERNODE))
-MYJOB=P$1.nprocEps"$NSLICES"p$NCORES
-QUEUE=low
-PTYPE=nanotube2-r
-echo submitting $MYJOB on $NNODES nodes to $QUEUE queue...
-qsub -n $NNODES -t $NMINUTES --mode c$NCORESPERNODE -q $QUEUE -o log.nanotube2-r_$MYJOB -e err.$MYJOB --jobname SIPs$MYJOB $DFTB/dftb -fA $DFTB_BIN/"$PTYPE"_P"$PSIZE"_A -fB $DFTB_BIN/"$PTYPE"_P"$PSIZE"_B -mat_mumps_icntl_13 1 -mat_mumps_icntl_28 2 -mat_mumps_icntl_29 2 -eps_nev 100 -eps_tol 1.e-4 -nprocEPS $NSLICES -log_summary 
-echo submitted.
+
+if [ $# -ge 4 ] 
+then 
+    NCORESPERNODE=$4
+else
+    : NCORESPERNODE=16
+fi
+if [ $# -ge 3 ] 
+then 
+  PSIZE=$1
+  NSLICES=$2
+  NCORES=$3
+  NMINUTES=30
+  NNODES=$(($NCORES / $NCORESPERNODE))
+  MYJOB=P$1.nprocEps"$NSLICES"p$NCORES
+  QUEUE=low
+  PTYPE=nanotube2-r
+  echo submitting $MYJOB on $NNODES nodes to $QUEUE queue...
+  qsub -n $NNODES -t $NMINUTES --mode c$NCORESPERNODE -q $QUEUE -o log.nanotube2-r_$MYJOB -e err.$MYJOB --jobname SIPs$MYJOB $DFTB/dftb -fA $DFTB_BIN/"$PTYPE"_P"$PSIZE"_A -fB $DFTB_BIN/"$PTYPE"_P"$PSIZE"_B -mat_mumps_icntl_13 1 -mat_mumps_icntl_28 2 -mat_mumps_icntl_29 2 -eps_nev 100 -eps_tol 1.e-4 -nprocEPS $NSLICES -log_summary 
+  echo submitted.
+else
+  echo submit script for dftb jobs
+  echo usage "s.sub i j k"
+  echo i: problem size,  j: number of slices, k: total number of cores
+fi
