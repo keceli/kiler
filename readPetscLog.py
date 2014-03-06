@@ -137,7 +137,9 @@ def readLogFile(file):
         return 0      
     else:
         logging.debug("Read file:{0} successfully".format(file))
-        print neig,"found in",totalTime[-1], "sec with", nSlices[-1],"slices and", nCores[-1], "cores."
+        logging.debug(nCores)
+        logging.debug(nSlices)
+        print neig,"eigenvalues found in",totalTime[-1], "s with", nSlices[-1],"slices and", nCores[-1], "cores."
                 
         return 0     
     
