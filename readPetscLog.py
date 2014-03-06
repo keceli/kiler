@@ -152,8 +152,8 @@ def plotTimings(nCoresPerSlice):
     plt.yscale('log',basey=2)
     plt.xlabel('Number of cores')
     plt.ylabel('Walltime (s)')
-    plt.xlim(min(x)*0.7,max(x)/0.7)
-    plt.ylim(min(y)*0.7,max(y)/0.7)
+    plt.xlim(min(nCores)*0.7,max(nCores)/0.7)
+    plt.ylim(min(totalTime)*0.7,max(totalTime)/0.7)
     plt.legend(loc='lower left')
 
 def plotSpeedup(nCoresPerSlice):

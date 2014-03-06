@@ -4,7 +4,7 @@ if [ $# -ge 4 ]
 then 
     NCORESPERNODE=$4
 else
-    : NCORESPERNODE=16
+    NCORESPERNODE=16
 fi
 if [ $# -ge 3 ] 
 then 
