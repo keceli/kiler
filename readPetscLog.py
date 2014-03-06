@@ -155,6 +155,7 @@ def plotTimings(nCoresPerSlice):
     plt.xlim(min(nCores)*0.7,max(nCores)/0.7)
     plt.ylim(min(totalTime)*0.7,max(totalTime)/0.7)
     plt.legend(loc='lower left')
+    plt.title(str(max(matrixSize)))
 
 def plotSpeedup(nCoresPerSlice):
     index=getIndex(nCoresPerSlice) 
