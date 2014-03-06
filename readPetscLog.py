@@ -164,6 +164,7 @@ def plotSpeedup(nCoresPerSlice):
     speedup=[]
     speedup=normalize(sorted(y,reverse=True))
     coreup=normalize(sorted(x,))
+    plt.figure()
     plt.plot(sorted(x),speedup,linestyle='None',marker='o',color='b',label=mylabel,markersize=8)
     plt.plot(sorted(x),[speedup[0]/coreup[i] for i in range(len(speedup))],linestyle='-',color='k',label='ideal')
     plt.xscale('log',basex=2)
@@ -172,7 +173,9 @@ def plotSpeedup(nCoresPerSlice):
     plt.ylabel('Speedup')
     plt.legend(loc='upper left')
     plt.title(mylabel)
-    plt.savefig('speedup.png')    
+    figname="speedup"+str(nCoresPerSlice)+".png"
+    plt.savefig(figname)    
+ 
     def plotEfficiency(ncores,timings):
         efficiency=[]
         efficiency=[speedup[i]*normalize(sorted(ncores))[i] for i in range(len(timings))]
@@ -184,9 +187,12 @@ def plotSpeedup(nCoresPerSlice):
         plt.xlabel('Number of cores')
         plt.ylabel('Efficiency')
         plt.title(mylabel)        
-        plt.savefig('efficiency.png')
+        figname="efficiency"+str(nCoresPerSlice)+".png"
+        plt.savefig(figname)            
         return
+    
     plotEfficiency(x,y)
+    return
 
     
 def plotProfile(nCoresPerSlice):
@@ -206,7 +212,9 @@ def plotProfile(nCoresPerSlice):
     plt.xlabel('Number of cores')
     plt.ylabel('Time (s)')
     plt.legend(loc='best')
-    
+    figname="profile"+str(nCoresPerSlice)+".png"
+    plt.savefig(figname)  
+      
 def plotPolyFit(x,y,n):
     #plot nth order polynomial fit   
     import numpy as np
@@ -273,29 +281,28 @@ def getArgs():
     parser.add_argument('input', metavar='FILE', type=str, nargs='?',
         help='Log file to be parsed. All log files will be read if a log file is not specified.')
     parser.add_argument('-d', '--debug', action='store_true', help='Print debug information.')
-
+    parser.add_argument('-n','--nCoresPerSlice', type=int, default=0,nargs='?', help='Speedup plots for specific number of cores per slice')
     return parser.parse_args()  
           
 def main():
     args=getArgs()
     initializeLog(args.debug)
-    
+    nCoresPerSlice=args.nCoresPerSlice
     if args.input is not None:
         logFile=args.input
         plotDensity=True
         readLogFile(logFile)
         plotEigDist()
-        exit()
     else:
         readLogDirectory()
-        plt.figure()
-        for i in range(max(nCores)):
-            plotTimings(i+1)
-        plt.savefig('timing.png')
-        plt.figure()
-        plotSpeedup(4)
-        plotProfile(4)
-        plt.savefig('profile.png')
+        if nCoresPerSlice > 0: 
+            plotSpeedup(nCoresPerSlice)
+            plotProfile(nCoresPerSlice)
+        else:
+            plt.figure()
+            for i in range(max(nCores)):
+                plotTimings(i+1)
+            plt.savefig('timing.png')
 
     plt.show()                  
 if __name__ == "__main__":
