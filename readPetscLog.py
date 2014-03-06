@@ -79,7 +79,7 @@ def readLogFile(file):
 #            /home/keceli/lib/dftb-eig14/dftb on a arch-bgq-ibm-opt named Q02-I0-J07.vesta.itd with 256 processors, by Unknown Fri Feb 21 00:38:53 2014
 #            Using Petsc Release Version 3.4.3, Oct, 15, 2013
 #            """
-            elif "processors" in line and "with" in line:
+            elif "processor" in line and "with" in line:
                 a=line.split()
                 nCores.append(int(a[7]))
 #             """
