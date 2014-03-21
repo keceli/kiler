@@ -69,10 +69,3 @@ export PETSC_ARCH=arch-linux2-c-opt
 export SLEPC_DIR=$BASE/lib/slepc-3.4.3
 export MPIEXEC=$PETSC_DIR/$PETSC_ARCH/bin/mpiexec
 
-# Local settings
-export PATH=~/bin:~/bin/kiler:$PATH
-export DFTB=~/lib/dftb-eig14
-export DFTB_BIN=~/data/matrix
-export PETSC_DIR=~/lib/petsc-3.4.3
-export PETSC_ARCH=arch-bgq-ibm-opt
-export SLEPC_DIR=~/lib/petsc-3.4.3
