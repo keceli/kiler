@@ -1,8 +1,26 @@
 #!/usr/bin/env bash
-echo submit script for dftb jobs
-echo usage "s.sub i j k l"
-echp i: number of nodes,  j: number of cores per node
-echo k: number of slices, l: problem size
-NP=$(($1 * $2))
-MYJOB=P$4.nprocEps$3p$NP
-qsub -n $1 -t 100 --mode c$2 -o log.nanotube2-r_$MYJOB -e err.$MYJOB --jobname SIPs$MYJOB $DFTB/dftb -fA $DFTB_BIN/nanotube2-r_P$4_A -fB $DFTB_BIN/nanotube2-r_P$4_B -mat_mumps_icntl_13 1 -mat_mumps_icntl_7 2 -eps_nev 100 -eps_tol 1.e-4 -nprocEPS $3 -log_summary  
+
+if [ $# -ge 4 ] 
+then 
+    NCORESPERNODE=$4
+else
+    NCORESPERNODE=16
+fi
+if [ $# -ge 3 ] 
+then 
+  PSIZE=$1
+  NSLICES=$2
+  NCORES=$3
+  NMINUTES=30
+  NNODES=$(($NCORES / $NCORESPERNODE))
+  MYJOB=P$1.nprocEps"$NSLICES"p$NCORES
+  QUEUE=low
+  PTYPE=nanotube2-r
+  echo submitting $MYJOB on $NNODES nodes to $QUEUE queue...
+  qsub -n $NNODES -t $NMINUTES --mode c$NCORESPERNODE -q $QUEUE -o log.nanotube2-r_$MYJOB -e err.$MYJOB --jobname SIPs$MYJOB $DFTB/dftb -fA $DFTB_BIN/"$PTYPE"_P"$PSIZE"_A -fB $DFTB_BIN/"$PTYPE"_P"$PSIZE"_B -mat_mumps_icntl_13 1 -mat_mumps_icntl_28 2 -mat_mumps_icntl_29 2 -eps_nev 100 -eps_tol 1.e-4 -nprocEPS $NSLICES -log_summary >/dev/null 2>&1&
+  echo submitted.
+else
+  echo submit script for dftb jobs
+  echo usage "s.sub i j k"
+  echo i: problem size,  j: number of slices, k: total number of cores
+fi
