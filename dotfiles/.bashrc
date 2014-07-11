@@ -60,9 +60,10 @@ export HISTCONTROL=ignoredups
 export HOSTFILE=$HOME/.hosts    # Put a list of remote hosts in ~/.hosts
 
 # Local settings
-export PATH=~/bin:~/bin/kiler:$PATH
-export DFTB=~/lib/dftb-eig14
-export DFTB_BIN=~/data/matrix
-export PETSC_DIR=~/lib/petsc-3.4.3
+export BASE=~/
+export PATH=$BASE/bin:~/bin/kiler:$PATH
+export DFTB=$BASE/rep/dftb-eig14
+export DFTB_BIN=$BASE/data/matrix
+export PETSC_DIR=$BASE/lib/petsc-3.4.3
 export PETSC_ARCH=arch-bgq-ibm-opt
-export SLEPC_DIR=~/lib/petsc-3.4.3
+export SLEPC_DIR=$BASE/lib/slepc-3.4.3
