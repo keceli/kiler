@@ -211,6 +211,7 @@ def plotLogScatter(x,y,xlabel,ylabel,myLegend,myTitle):
   #  plt.ylim(min(y)*0.7,max(y)/0.7)
     plt.legend(loc='lower left')
     plt.legend(loc='upper left')
+    plt.legend(loc='best')
 #    plt.title(myTitle)
     plt.grid(which='major', axis='both')    
     
@@ -405,9 +406,10 @@ def main():
         matlist1=[64000,128000,512000]
         matlist1=[32000,128000,512000]
         matlist2=[8000,16000,19200]
-     #   makeStrongScalingPlots(matlist1)
+        matlist3=[8064,16128,31968]
+        makeStrongScalingPlots(matlist2)
 
-        makeSpeedupPlots(matlist1)
+#        makeSpeedupPlots(matlist1)
 
         plt.show()                  
     else:

@@ -128,6 +128,7 @@ def draw2(bins, blockSize, myTitle):
     frame1.get_yaxis().set_ticks([])
     ax=plt.subplot(111)
     im=plt.imshow(bins, cmap=my_cmap, interpolation='none', vmin=0.0)
+ #   im=plt.imshow(bins, cmap=my_cmap, interpolation='none', norm=matplotlib.colors.LogNorm(vmin=0.01, vmax=1))
 
 #    plt.title("{2} \n - {0:,}x{0:,} blocks of size {3:,}x{3:,} \n ({1:,} non-zero blocks )".format(blockNbr, count, fname, blockSize))
  #   plt.title(myTitle)
@@ -169,10 +170,10 @@ if __name__ == "__main__":
     print("Binning computed in {2} seconds: {0[0]:,}x{0[0]:,} blocks of size {1}x{1} (total: {0[1]:,} blocks)".format((len(bins), len(bins)**2), blockSize,timeElapsed))
     myTitle="bins_of_max_values_"+fname
     draw2(bins, blockSize,myTitle)
-    start = time.time()
-    bins=binning(M, blockSize)
-    timeElapsed = time.time() - start
-    print("Binning computed in {2} seconds: {0[0]:,}x{0[0]:,} blocks of size {1}x{1} (total: {0[1]:,} blocks)".format((len(bins), len(bins)**2), blockSize,timeElapsed))
+    #start = time.time()
+   # bins=binning(M, blockSize)
+   # timeElapsed = time.time() - start
+   # print("Binning computed in {2} seconds: {0[0]:,}x{0[0]:,} blocks of size {1}x{1} (total: {0[1]:,} blocks)".format((len(bins), len(bins)**2), blockSize,timeElapsed))
     myTitle="bins_of_nnz_values_"+fname
-    draw(bins, blockSize,myTitle)
+   # draw(bins, blockSize,myTitle)
 
