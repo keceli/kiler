@@ -58,12 +58,14 @@ export HISTIGNORE="&:bg:fg:ll:h"
 export HISTTIMEFORMAT="$(echo -e ${BCyan})[%d/%m %H:%M:%S]$(echo -e ${NC}) "
 export HISTCONTROL=ignoredups
 export HOSTFILE=$HOME/.hosts    # Put a list of remote hosts in ~/.hosts
-
 # Local settings
-export BASE=~/
-export PATH=$BASE/bin:~/bin/kiler:$PATH
-export DFTB=$BASE/rep/dftb-eig14
+export BASE=/home/keceli
+export MYWORK=$BASE/work
+export PATH=$BASE/bin:$PATH
+export DFTB=$MYWORK/dftb-eig14
 export DFTB_BIN=$BASE/data/matrix
 export PETSC_DIR=$BASE/lib/petsc-3.4.3
-export PETSC_ARCH=arch-bgq-ibm-opt
+export PETSC_ARCH=arch-linux2-c-opt
 export SLEPC_DIR=$BASE/lib/slepc-3.4.3
+export MPIEXEC=$PETSC_DIR/$PETSC_ARCH/bin/mpiexec
+
