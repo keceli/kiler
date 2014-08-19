@@ -125,7 +125,7 @@ def readLogFile(file):
                 elif line.startswith("["):
                     if "nconv" in line and "in" in line:
                         nevalList.append(int(a[2]))
-                    else:
+                    elif "in" in line:
                         nevalList.append(int(a[1]))    
                 elif line.startswith("Time (sec):"):
                     errorCode=0
