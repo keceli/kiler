@@ -125,7 +125,7 @@ def readLogFile(file):
                 elif line.startswith("["):
                     if "nconv" in line and "in" in line:
                         nevalList.append(int(a[2]))
-                    elif "in" in line:
+                    elif "in" in line and "time" in line:
                         nevalList.append(int(a[1]))    
                 elif line.startswith("Time (sec):"):
                     errorCode=0
@@ -217,7 +217,8 @@ def main():
         readLogDirectory()
   #      DataOut = np.column_stack((matrixSize,nEigenvalues,nCores,nSlices,totalTime,mainTime,setupTime,solveTime,finalTime,timeStage3)) 
         DataOut = np.column_stack((matrixSize,nEigenvalues,nCores,nSlices,totalTime,solveTime)) 
-        print "File matrixSize nCores nSlices nEigenvalues solveTime MatMult MatSolve MatCholFctrSym MatCholFctrNum VecScatterEnd MatMult MatSolve MatCholFctrSym MatCholFctrNum VecScatterEnd"
+#        print "File matrixSize nCores nSlices nEigenvalues solveTime MatMult MatSolve MatCholFctrSym MatCholFctrNum VecScatterEnd MatMult MatSolve MatCholFctrSym MatCholFctrNum VecScatterEnd"
+        print "File matrixSize nCores nSlices nEigenvalues solveTime MatMult MatSolve MatCholFctrSym MatCholFctrNum BVOrthogonalize MatMult MatSolve MatCholFctrSym MatCholFctrNum BVOrthogonalize"
         np.savetxt('timings.dat', DataOut) 
 
 if __name__ == "__main__":
