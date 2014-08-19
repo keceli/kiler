@@ -237,6 +237,16 @@ def plot121eigenvalues(n):
     plt.show()                  
     return
 
+def plotEigenvalues(eigenFile):
+    eigs=np.loadtxt(eigenFile,unpack=True)
+    plt.figure()
+    plt.xlabel("Eigenvalue spectrum (ev)")
+    plt.ylabel("Number of eigenvalues")
+    plt.hist(eigs,1000)
+    plt.savefig(eigenFile+".pdf")                  
+    #plt.show()                  
+    return
+
 def plotEfficiency(matSize):
     x=[]
     y=[]
@@ -413,8 +423,10 @@ def main():
 
         plt.show()                  
     else:
+        import glob
         print "Requires input data file"
-        plot121eigenvalues(1000)
+        plotEigenvalues(glob.glob("eigs_*txt")[0])
+   #     plot121eigenvalues(1000)
 
 if __name__ == "__main__":
     main()
