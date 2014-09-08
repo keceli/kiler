@@ -93,7 +93,8 @@ def readLogFile(file):
     errorCode=1
     filename.append(file)
     logging.debug("Reading file {0}".format(file))
-    
+    profile_count=[0]*(len(profile))
+    profile_time=[0.0]*(len(profile))
     with open(file) as f:
         while True:          
             line = f.readline()
@@ -152,7 +153,7 @@ def readLogFile(file):
                     if line.startswith(profile[i]):
 #                        profile_count[i]=int((a[1]))
                         profile_count[i]=profile_count[i]+int(line[18:24])
-                        profile_time[i]=profile_time[i]+float(line[29:39])
+                        profile_time[i]=profile_time[i]+ float(line[29:39])
                     
     neig=sum(nevalList)
 
