@@ -119,7 +119,7 @@ def readLogFile(file):
                                 if option_keys[i] in line:
                                     if a[1]!=option_values[i]:
                                         option_values[i]=a[1]
-                                        print option_keys[i],option_values[i]
+                                        #print option_keys[i],option_values[i]
                 elif "processor" in line and "with" in line:
                     nCores.append(int(a[7]))
                 elif line.startswith("["):
@@ -151,8 +151,8 @@ def readLogFile(file):
                 for i in range(len(profile)):
                     if line.startswith(profile[i]):
 #                        profile_count[i]=int((a[1]))
-                        profile_count[i]=int(line[18:24])
-                        profile_time[i]=float(line[29:39])
+                        profile_count[i]=profile_count[i]+int(line[18:24])
+                        profile_time[i]=profile_time[i]+float(line[29:39])
                     
     neig=sum(nevalList)
 
