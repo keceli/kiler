@@ -175,7 +175,7 @@ def readLogFile(file):
         logging.debug(nCores)
         logging.debug(nSlices)
      #   print neig,"eigenvalues found in",totalTime[-1], "s with", nSlices[-1],"slices and", nCores[-1], "cores."
-        print file,matrixSize[-1],nCores[-1],nSlices[-1],nEigenvalues[-1],solveTime[-1],list2Str(profile_count),list2Str(profile_time)
+        print file,matrixSize[-1],nCores[-1],nSlices[-1],nEigenvalues[-1],list2Str(profile_count),list2Str(profile_time),setupTime[-1],solveTime[-1]
                 
         return 0     
     
@@ -219,7 +219,7 @@ def main():
   #      DataOut = np.column_stack((matrixSize,nEigenvalues,nCores,nSlices,totalTime,mainTime,setupTime,solveTime,finalTime,timeStage3)) 
         DataOut = np.column_stack((matrixSize,nEigenvalues,nCores,nSlices,totalTime,solveTime)) 
 #        print "File matrixSize nCores nSlices nEigenvalues solveTime MatMult MatSolve MatCholFctrSym MatCholFctrNum VecScatterEnd MatMult MatSolve MatCholFctrSym MatCholFctrNum VecScatterEnd"
-        print "File matrixSize nCores nSlices nEigenvalues solveTime MatMult MatSolve MatCholFctrSym MatCholFctrNum BVOrthogonalize MatMult MatSolve MatCholFctrSym MatCholFctrNum BVOrthogonalize"
+        print "File Length nCores nSlices nEigs nMult nSolve nSym nNum nOrtho tMult tSolve tSym tNum tOrtho tSetup tSips"
         np.savetxt('timings.dat', DataOut) 
 
 if __name__ == "__main__":
