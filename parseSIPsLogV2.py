@@ -217,10 +217,10 @@ def main():
     else:
         readLogDirectory()
   #      DataOut = np.column_stack((matrixSize,nEigenvalues,nCores,nSlices,totalTime,mainTime,setupTime,solveTime,finalTime,timeStage3)) 
-        DataOut = np.column_stack((matrixSize,nEigenvalues,nCores,nSlices,totalTime,solveTime)) 
+    #    DataOut = np.column_stack((matrixSize,nEigenvalues,nCores,nSlices,totalTime,solveTime)) 
 #        print "File matrixSize nCores nSlices nEigenvalues solveTime MatMult MatSolve MatCholFctrSym MatCholFctrNum VecScatterEnd MatMult MatSolve MatCholFctrSym MatCholFctrNum VecScatterEnd"
         print "File Length nCores nSlices nEigs nMult nSolve nSym nNum nOrtho tMult tSolve tSym tNum tOrtho tSetup tSips"
-        np.savetxt('timings.dat', DataOut) 
+     #   np.savetxt('timings.dat', DataOut) 
 
 if __name__ == "__main__":
     main()
