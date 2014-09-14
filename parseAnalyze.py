@@ -11,7 +11,6 @@ keys=[
       "Norm_Infinity",
       "Memory:",
       "Memory_Relaxation_icntl14",
-      "Ordering_7",
       "Nonzeros:",
       "NonzerosAfterAnalysis_20",
       "NonzerosAfterFactorization_29",
@@ -39,9 +38,10 @@ def readLogFile(logfile):
     errorCode="OK"
     values=["NA"]*len(keys)
     a=logfile.split('.')
+    order=a[2][-1]
     a=a[2].split('c')
     p=a[0].strip('p')
-    c=a[1][0:1].strip('o')
+    c=a[1][0:2].strip('o')
     logging.debug("Reading file {0}".format(logfile))
     with open(logfile) as f:
         while True:          
@@ -53,11 +53,11 @@ def readLogFile(logfile):
                     if keys[i] in line:
                         a=line.split()
                         values[i]=a[-1]
-                if "error" in line.lower():
-                    errorCode="error"
+                if "Error" in line or "ERROR" in line:
+                    errorCode="ER"
                 if "Performance may be degraded" in line:
-                    errorCode="performance"            
-        print logfile,errorCode,p,c,list2Str(values)               
+                    errorCode="SL"            
+        print logfile,errorCode,p,c,order,list2Str(values)               
         return 0     
     
 
@@ -91,7 +91,7 @@ def getArgs():
 def main():
     args=getArgs()
     initializeLog(args.debug)
-    print "file, error",list2Str(keys)
+    print "file error p c o",list2Str(keys)
     if args.input is not None:
         logFile=args.input
         readLogFile(logFile)
