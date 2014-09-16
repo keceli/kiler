@@ -10,7 +10,7 @@ keys=[
       "4:      SIPSSolve1:",
       "5:      SIPSSolve2:",
       "Memory:",
-      "Flops/sec",
+      "Flops/sec:",
       "-mat_mumps_icntl_23",
       ]
 
@@ -29,10 +29,10 @@ def readLogFile(logfile):
     values=["NA"]*len(keys)
     #log.nanotube2-r_P6.nprocEps16p256.c16.n16.03s30m23h
     a=logfile.split('.')
-    s=a[2].split('p')[0].remove('nprocEps')
-    p=a[2].split('p')[1].remove('p')
-    c=a[3].remove('c')
-    n=a[4].remove('n')
+    s=a[2].split('p')[2].replace('s','')
+    p=a[2].split('p')[3].replace('p','')
+    c=a[3].replace('c','')
+    n=a[4].replace('n','')
     logging.debug("Reading file {0}".format(logfile))
     with open(logfile) as f:
         while True:          
@@ -42,8 +42,8 @@ def readLogFile(logfile):
             else:
                 for i in range(len(keys)):
                     if keys[i] in line:
-                        a=line.remove(keys[i]).split()
-                        values[i]=a[1]
+                        a=line.replace(keys[i],'').split()
+                        values[i]=a[0]
                 if "Error" in line or "ERROR" in line:
                     errorCode="ER"
                 if "Performance may be degraded" in line:
