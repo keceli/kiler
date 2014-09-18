@@ -50,8 +50,10 @@ def parseFileName(filename):
     c=a[3].replace('c','')
     n=a[4].replace('n','')
     return [s,p,c,n]
-    
 
+def prune(mystr):
+    return mystr.remove('-0.8,0.2','').remove('100','').remove('1.e-8','').remove(' ','-')
+    
 def readLogFile(logfile):
     errorCode="OK"
     values=["NA"]*len(keys)
@@ -82,7 +84,7 @@ def readLogFile(logfile):
                     
             else:
                 for i in range(len(keys)):
-                    if keys[i] in line:
+                    if line.startswith(keys[i]):
                         a=line.replace(keys[i],'').split()
                         values[i]=a[0]
                 for i in range(len(long_keys)):
@@ -92,9 +94,12 @@ def readLogFile(logfile):
                                                 
                 if "Error" in line or "ERROR" in line:
                     errorCode="ER"
+                    print errorCode, logfile
                 if "Performance may be degraded" in line:
-                    errorCode="SL"            
-        print logfile,errorCode,list2Str(spcn),list2Str(values),list2Str(profile_count),list2Str(profile_time),list2Str(long_values)               
+                    errorCode="SL"   
+                    print errorCode, logfile
+         
+        print logfile,list2Str(spcn),list2Str(values[0:3]),list2Str(profile_count),list2Str(profile_time),list2Str(values[3:7]),prune(list2Str(values[7:])),prune(list2Str(long_values))              
     return 0     
     
 
