@@ -52,7 +52,7 @@ def parseFileName(filename):
     return [s,p,c,n]
 
 def prune(mystr):
-    return mystr.remove('-0.8,0.2','').remove('100','').remove('1.e-8','').remove(' ','-')
+    return mystr.replace('-0.80.2','').replace('100','').replace('1.e-8','').replace(' ','-').replace('-arch-xl-scotch','')
     
 def readLogFile(logfile):
     errorCode="OK"
