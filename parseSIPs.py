@@ -11,8 +11,27 @@ keys=[
       "5:      SIPSSolve2:",
       "Memory:",
       "Flops/sec:",
+      "-mat_mumps_icntl_7",
+      "-mat_mumps_icntl_29",
       "-mat_mumps_icntl_23",
+      "-eps_krylovschur_nev",
+      "-sips_interval",
+      "-eps_tol",
+      "Using PETSc arch:"
       ]
+
+long_keys=[
+           "PETSc version:",
+           "SLEPc version:",
+           ]
+
+profile_keys=[
+             "MatMult",
+             "MatSolve",
+             "MatCholFctrSym",
+             "MatCholFctrNum",
+             "BVOrthogonalize",
+             ]
 
 def list2Str(list1):
     return str(list1).replace('[','').replace(']','').replace(',','').replace("'","").replace(":","")
@@ -24,32 +43,59 @@ def readLogDirectory():
         readLogFile(myfile)
     return 0
 
-def readLogFile(logfile):
-    errorCode="OK"
-    values=["NA"]*len(keys)
-    #log.nanotube2-r_P6.nprocEps16p256.c16.n16.03s30m23h
-    a=logfile.split('.')
+def parseFileName(filename):
+    a=filename.split('.')
     s=a[2].split('p')[2].replace('s','')
     p=a[2].split('p')[3].replace('p','')
     c=a[3].replace('c','')
     n=a[4].replace('n','')
+    return [s,p,c,n]
+    
+
+def readLogFile(logfile):
+    errorCode="OK"
+    values=["NA"]*len(keys)
+    long_values=["NA"]*len(long_keys)
+    profile_time=[0.0]*len(profile_keys)
+    profile_count=[0]*len(profile_keys)
+    #log.nanotube2-r_P6.nprocEps16p256.c16.n16.03s30m23h
+    spcn="NA"
+    spcn=parseFileName(logfile)
     logging.debug("Reading file {0}".format(logfile))
     with open(logfile) as f:
         while True:          
             line = f.readline()
             if not line: 
                 break
+            elif line.startswith("--- Event Stage 2: "):
+                while True:
+                    line = f.readline()
+                    if not line: 
+                        break
+                    elif line.startswith("--- Event Stage 4:"):
+                        break
+                    else:
+                        for i in range(len(profile_keys)):
+                            if line.startswith(profile_keys[i]):
+                                profile_count[i]=profile_count[i]+int(line[18:24])
+                                profile_time[i]=profile_time[i]+ float(line[29:39])
+                    
             else:
                 for i in range(len(keys)):
                     if keys[i] in line:
                         a=line.replace(keys[i],'').split()
                         values[i]=a[0]
+                for i in range(len(long_keys)):
+                    if line.startswith(long_keys[i]):
+                        a=line.split()[-3]+"-"+line.split()[-2]
+                        long_values[i]=a
+                                                
                 if "Error" in line or "ERROR" in line:
                     errorCode="ER"
                 if "Performance may be degraded" in line:
                     errorCode="SL"            
-        print logfile,errorCode,s,p,c,n,list2Str(values)               
-        return 0     
+        print logfile,errorCode,list2Str(spcn),list2Str(values),list2Str(profile_count),list2Str(profile_time),list2Str(long_values)               
+    return 0     
     
 
 def initializeLog(debug):
