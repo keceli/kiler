@@ -5,10 +5,10 @@ import itertools
 
 keys=[
       "A:",
-      "2:       SIPSSetUp:",
-      "3:      SIPSSolve0:",
-      "4:      SIPSSolve1:",
-      "5:      SIPSSolve2:",
+      " 2:       SIPSSetUp:",
+      " 3:      SIPSSolve0:",
+      " 4:      SIPSSolve1:",
+      " 5:      SIPSSolve2:",
       "Memory:",
       "Flops/sec:",
       "-mat_mumps_icntl_7",
@@ -52,7 +52,7 @@ def parseFileName(filename):
     return [s,p,c,n]
 
 def prune(mystr):
-    return mystr.replace('-0.80.2','').replace('100','').replace('1.e-8','').replace(' ','-').replace('-arch-xl-scotch','')
+    return mystr.replace('-0.80.2','D').replace('100','D').replace('1.e-8','D').replace(' ','-').replace('-arch-xl-scotch','D')
     
 def readLogFile(logfile):
     errorCode="OK"
@@ -99,7 +99,7 @@ def readLogFile(logfile):
                     errorCode="SL"   
                     print errorCode, logfile
          
-        print logfile,list2Str(spcn),list2Str(values[0:3]),list2Str(profile_count),list2Str(profile_time),list2Str(values[3:7]),prune(list2Str(values[7:])),prune(list2Str(long_values))              
+        print logfile,values[0],list2Str(spcn),list2Str(values[1:3]),list2Str(profile_count),list2Str(profile_time),list2Str(values[3:7]),prune(list2Str(values[7:])),prune(list2Str(long_values))              
     return 0     
     
 
