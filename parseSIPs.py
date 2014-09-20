@@ -54,7 +54,11 @@ def parseFileName(filename):
 def prune(mystr):
     return mystr.replace('-0.80.2','D').replace('100','D').replace('1.e-8','D').replace(' ','-').replace('-arch-xl-scotch','D')
     
+def getRatio(matSize,nRanks):
+    return matSize/nRanks**0.5
+
 def readLogFile(logfile):
+    import socket
     errorCode="OK"
     values=["NA"]*len(keys)
     long_values=["NA"]*len(long_keys)
@@ -63,6 +67,7 @@ def readLogFile(logfile):
     #log.nanotube2-r_P6.nprocEps16p256.c16.n16.03s30m23h
     spcn="NA"
     spcn=parseFileName(logfile)
+    
     logging.debug("Reading file {0}".format(logfile))
     with open(logfile) as f:
         while True:          
@@ -87,6 +92,7 @@ def readLogFile(logfile):
                     if line.startswith(keys[i]):
                         a=line.replace(keys[i],'').split()
                         values[i]=a[0]
+                        ratio=getRatio(int(a[0]),int(spcn[1]))
                 for i in range(len(long_keys)):
                     if line.startswith(long_keys[i]):
                         a=line.split()[-3]+"-"+line.split()[-2]
@@ -98,8 +104,10 @@ def readLogFile(logfile):
                 if "Performance may be degraded" in line:
                     errorCode="SL"   
                     print errorCode, logfile
-         
-        print logfile,values[0],list2Str(spcn),list2Str(values[1:3]),list2Str(profile_count),list2Str(profile_time),list2Str(values[3:7]),prune(list2Str(values[7:])),prune(list2Str(long_values))              
+        tAll=float(values[1])+float(values[2]) 
+        print logfile,values[0],list2Str(spcn),ratio,list2Str(values[1:3]),tAll,list2Str(profile_count),\
+        list2Str(profile_time),list2Str(values[3:7]),prune(list2Str(values[7:])),\
+        prune(list2Str(long_values)),socket.gethostname()              
     return 0     
     
 
