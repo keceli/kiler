@@ -92,7 +92,7 @@ def readLogFile(logfile):
                     if line.startswith(keys[i]):
                         a=line.replace(keys[i],'').split()
                         values[i]=a[0]
-                        ratio=getRatio(int(a[0]),int(spcn[1]))
+                        if i==0: ratio=getRatio(int(a[0]),int(spcn[1]))
                 for i in range(len(long_keys)):
                     if line.startswith(long_keys[i]):
                         a=line.split()[-3]+"-"+line.split()[-2]
