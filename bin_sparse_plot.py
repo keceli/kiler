@@ -127,15 +127,18 @@ def draw2(bins, blockSize, myTitle):
     frame1.get_xaxis().set_ticks([])
     frame1.get_yaxis().set_ticks([])
     ax=plt.subplot(111)
-    im=plt.imshow(bins, cmap=my_cmap, interpolation='none', vmin=0.0)
+    print 'test'
+#    im=plt.imshow(bins, cmap=my_cmap, interpolation='none', vmin=0.0, vmax=2000.0)
+    im=plt.imshow(bins, vmin=0, vmax=3000.0, cmap=my_cmap)
  #   im=plt.imshow(bins, cmap=my_cmap, interpolation='none', norm=matplotlib.colors.LogNorm(vmin=0.01, vmax=1))
 
 #    plt.title("{2} \n - {0:,}x{0:,} blocks of size {3:,}x{3:,} \n ({1:,} non-zero blocks )".format(blockNbr, count, fname, blockSize))
  #   plt.title(myTitle)
     # COLORBAR OF THE RIGHT SIZE
-    divider = make_axes_locatable(ax)
-    cax = divider.append_axes("right", size="5%", pad=.5)
-    plt.colorbar(im, cax=cax)
+ #   divider = make_axes_locatable(ax)
+ #   cax = divider.append_axes("right", size="5%", pad=.5)
+  #  plt.colorbar(im, cax=cax)
+    plt.colorbar()
     plt.savefig(myTitle+".eps")     
     
 def plotSpy(M,eps,myTitle):
@@ -164,8 +167,8 @@ if __name__ == "__main__":
  #   plotSpy(M,0,myTitle)
  #   plotSpy(M,0.1,myTitle)
     start = time.time()
-#    bins=binning(M, blockSize)
-    bins=maxValueBins(M, blockSize)
+    bins=binning(M, blockSize)
+#    bins=maxValueBins(M, blockSize)
     timeElapsed = time.time() - start
     print("Binning computed in {2} seconds: {0[0]:,}x{0[0]:,} blocks of size {1}x{1} (total: {0[1]:,} blocks)".format((len(bins), len(bins)**2), blockSize,timeElapsed))
     myTitle="bins_of_max_values_"+fname
