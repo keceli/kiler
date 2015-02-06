@@ -17,7 +17,8 @@ keys=[
       "-eps_krylovschur_nev",
       "-sips_interval",
       "-eps_tol",
-      "Using PETSc arch:"
+      "Using PETSc arch:",
+      "Total "
       ]
 
 long_keys=[
