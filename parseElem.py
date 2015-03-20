@@ -18,6 +18,11 @@ keys=[
       " was read in (s):",
       " Matrix heights:",
       " Memory size:",
+      "Condense time:",
+      "TridiagEig time",
+      "Redist time:",
+      "Backtransform time:",
+      "Scale+sort time:",
       " Solved in (s):",
       "interval",
       ]
@@ -29,7 +34,7 @@ def list2Str(list1):
 def readLogDirectory():
     import glob
     global filename
-    for myfile in glob.glob("log.*"):
+    for myfile in glob.glob("log*"):
         readLogFile(myfile)
     return 0
 
@@ -57,7 +62,8 @@ def readLogFile(logfile):
                 for i in range(len(keys)):
                     if keys[i] in line:
                         a=line.split()
-                        values[i]=a[-1]
+			if a[-1]=='secs': values[i]=a[-2]
+                        else: values[i]=a[-1]
                         if i==len(keys)-1: values[i+1]=a[1]
 
 
