@@ -1,0 +1,109 @@
+Host *
+    ServerAliveInterval 300
+    ServerAliveCountMax 3
+    UseKeychain yes
+    ControlMaster	auto	
+    ControlPath	~/.ssh/master-%r@%h:%p	
+#    XAuthLocation /usr/X11/bin/xauth
+Host theta
+    HostName theta.alcf.anl.gov
+    User keceli
+
+Host anchil
+    Hostname anchil2.cse.anl.gov
+    User kecelim
+
+Host bebop
+    HostName bebop.lcrc.anl.gov
+    User keceli
+
+Host blues
+    HostName blues.lcrc.anl.gov
+    User keceli
+
+Host blues1
+    HostName blogin1.lcrc.anl.gov
+    User keceli
+
+Host blues2
+    HostName blogin2.lcrc.anl.gov
+    User keceli
+
+Host blues3
+    HostName blogin3.lcrc.anl.gov
+    User keceli
+
+Host blues4
+    HostName blogin4.lcrc.anl.gov
+    User keceli
+
+Host fusion
+    HostName fusion.lcrc.anl.gov
+    User keceli
+
+Host vesta
+    HostName vesta.alcf.anl.gov
+    User keceli
+
+Host tukey
+    HostName tukey.alcf.anl.gov
+    User keceli
+
+Host mira
+    HostName mira.alcf.anl.gov
+    User keceli
+
+Host cetus
+    HostName cetus.alcf.anl.gov
+    User keceli
+
+Host mcs
+    HostName login.mcs.anl.gov
+    User keceli
+
+Host pople
+    HostName pople.tcg.anl.gov
+    User kecelim
+
+Host linus
+    HostName linus.tcg.anl.gov
+    User kecelim
+
+Host bw
+    HostName bw.ncsa.illinois.edu
+    User keceli
+
+Host gellmann
+    Hostname gellmann.scs.uiuc.edu
+    User keceli2
+
+Host pharos
+    Hostname pharos.mit.edu
+    User keceli
+
+Host edison
+    Hostname edison.nersc.gov
+    User train51
+
+Host anl
+    Hostname anchil2.cse.anl.gov
+    User kecelim
+
+Host cori
+    Hostname cori.nersc.gov
+    User keceli
+
+Host edison
+    Hostname edison.nersc.gov
+    User keceli
+
+Host cem
+    Hostname 52.164.231.158
+    User csevik
+
+Host gezi
+    Hostname 192.168.255.14
+    User csevik
+
+    ControlMaster auto
+    ControlPath ~/.ssh/master-%r@%h:%p
