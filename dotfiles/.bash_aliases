@@ -37,7 +37,7 @@ alias df='df -kTh'
 if ls --color=auto / >/dev/null 2>&1
 then
  alias ls='ls -hC --color=auto' # GNU ls
- alias ll="ls -lvt --group-directories-first"
+ alias ll="gls -lvt --group-directories-first --color=auto"
 else
  alias ls='ls -hC -G' # BSD ls
  alias ll="ls -lvt "

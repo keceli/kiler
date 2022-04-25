@@ -457,3 +457,14 @@ _killall()
 
 complete -F _killall killall killps
 
+echo_red() {
+    echo -e "\e[31m${1}\e[0m"
+}
+
+echo_green() {
+    echo -e "\e[32m${1}\e[0m"
+}
+
+echo_blue() {
+    echo -e "\e[34m${1}\e[0m"
+}
