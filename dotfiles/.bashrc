@@ -56,4 +56,5 @@ unset MAILCHECK        # Don't want my shell to warn me of incoming mail.
 export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
 export HISTIGNORE="&:bg:fg:ll:h"
 export HISTTIMEFORMAT="$(echo -e ${BCyan})[%d/%m %H:%M:%S]$(echo -e ${NC}) "
+export HISTSIZE=100000000
 export HISTCONTROL=ignoredups
