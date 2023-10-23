@@ -10,7 +10,6 @@ alias cd5='cd ../../../../../'
 alias cdb='cd -'
 alias sdiffs='sdiff --suppress-common-lines'
 alias viper='emacs -nw'
-alias less='less -i'
 
 
 alias rm='rm -i'
@@ -38,7 +37,7 @@ alias df='df -kTh'
 if ls --color=auto / >/dev/null 2>&1
 then
  alias ls='ls -hC --color=auto' # GNU ls
- alias ll="ls -lvt --group-directories-first"
+ alias ll="gls -lvt --group-directories-first --color=auto"
 else
  alias ls='ls -hC -G' # BSD ls
  alias ll="ls -lvt "
@@ -56,3 +55,6 @@ alias lr='ll -R'           #  Recursive ls.
 alias la='ll -A'           #  Show hidden files.
 alias tree='tree -Csuh'    #  Nice alternative to 'recursive ls' ...
 alias lq='qstat -f -u `whoami`'
+
+alias sshg='ssh homes-01.cels.anl.gov'
+alias sshn='ssh -t homes-01.cels.anl.gov ssh nwx'
